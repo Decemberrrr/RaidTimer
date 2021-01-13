@@ -6,6 +6,7 @@ import com.anotherdeveloper.raidtimer.Utils.ObjectSet;
 import com.anotherdeveloper.raidtimer.Utils.TimeUtil;
 import com.anotherdeveloper.raidtimer.Utils.XMaterial;
 import com.massivecraft.factions.*;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -98,15 +99,30 @@ public class RaidListener implements Listener {
     private void onUseBucket(PlayerInteractEvent event) {
         if (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Player player = event.getPlayer();
-            if (player.getInventory().getItemInMainHand().getType() == Material.BUCKET
-                    || player.getInventory().getItemInMainHand().getType() == Material.LAVA_BUCKET
-                    || player.getInventory().getItemInMainHand().getType() == Material.WATER_BUCKET) {
-                FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
-                Faction faction = fPlayer.getFaction();
-                if (faction == null || faction.isWilderness() || faction.isWarZone() || faction.isSafeZone()) {
+            FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
+            Faction faction = fPlayer.getFaction();
+
+            if (faction == null || faction.isWilderness() || faction.isWarZone() || faction.isSafeZone()) {
+                return;
+            }
+
+            if (plugin.getRaidBlocked().containsKey(faction)) {
+                if (Bukkit.getServer().getClass().getPackage().getName().contains("1_8")) {
+                    if (player.getInventory().getItemInHand().getType() == Material.BUCKET
+                        || player.getInventory().getItemInHand().getType() == Material.LAVA_BUCKET
+                        || player.getInventory().getItemInHand().getType() == Material.WATER_BUCKET) {
+                        if (faction.getAllClaims().contains(new FLocation(player.getLocation()))) {
+                            plugin.sendMessage(player, "CANNOT-USE-BUCKET", new ObjectSet("{timeleft}", TimeUtil.formatTime(plugin.getRaidBlocked().get(faction).getTimeRemainingInSeconds())));
+                            event.setCancelled(true);
+                            return;
+                        }
+                    }
                     return;
                 }
-                if (plugin.getRaidBlocked().containsKey(faction)) {
+                if (player.getInventory().getItemInMainHand().getType() == Material.BUCKET
+                        || player.getInventory().getItemInMainHand().getType() == Material.LAVA_BUCKET
+                        || player.getInventory().getItemInMainHand().getType() == Material.WATER_BUCKET) {
+
                     if (faction.getAllClaims().contains(new FLocation(player.getLocation()))) {
                         plugin.sendMessage(player, "CANNOT-USE-BUCKET", new ObjectSet("{timeleft}", TimeUtil.formatTime(plugin.getRaidBlocked().get(faction).getTimeRemainingInSeconds())));
                         event.setCancelled(true);
@@ -119,21 +135,22 @@ public class RaidListener implements Listener {
     @EventHandler
     private void onSpawnerChest(InventoryClickEvent event) {
         if (event.getView().getTopInventory() != null) {
-            if (XMaterial.matchXMaterial(event.getCurrentItem().getType()) == XMaterial.matchXMaterial(Material.SPAWNER)) {
-                Player player = (Player) event.getWhoClicked();
-                FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
-                Faction faction = fPlayer.getFaction();
-                if (faction == null || faction.isWilderness() || faction.isWarZone() || faction.isSafeZone()) {
-                    return;
-                }
-                if (plugin.getRaidBlocked().containsKey(faction)) {
-                    if (!plugin.getConfigFile().getConfig().getBoolean("settings.allow-chest-spawners")) {
-                        plugin.sendMessage(player, "CANNOT-CHEST-SPAWNER", new ObjectSet("{timeleft}", TimeUtil.formatTime(plugin.getRaidBlocked().get(faction).getTimeRemainingInSeconds())));
-                        event.setCancelled(true);
+                if (XMaterial.matchXMaterial(Objects.requireNonNull(event.getCurrentItem()).getType()) == XMaterial.SPAWNER) {
+                    Player player = (Player) event.getWhoClicked();
+                    FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
+                    Faction faction = fPlayer.getFaction();
+                    if (faction == null || faction.isWilderness() || faction.isWarZone() || faction.isSafeZone()) {
+                        return;
+                    }
+                    if (plugin.getRaidBlocked().containsKey(faction)) {
+                        if (!plugin.getConfigFile().getConfig().getBoolean("settings.allow-chest-spawners")) {
+                            plugin.sendMessage(player, "CANNOT-CHEST-SPAWNER", new ObjectSet("{timeleft}", TimeUtil.formatTime(plugin.getRaidBlocked().get(faction).getTimeRemainingInSeconds())));
+                            event.setCancelled(true);
+                            return;
+                        }
                     }
                 }
             }
-        }
     }
 
     @EventHandler

@@ -8,6 +8,7 @@ import com.anotherdeveloper.raidtimer.Utils.ObjectSet;
 import com.massivecraft.factions.Faction;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,7 +29,6 @@ public class RaidTimer extends JavaPlugin {
     public void onEnable() {
         this.configFile = new DataFile(this, "config", true);
         this.messageFile = new DataFile(this, "messages", true);
-
         if(getServer().getPluginManager().getPlugin("SaberFactions") != null || getServer().getPluginManager().getPlugin("SavageFactions") != null || getServer().getPluginManager().getPlugin("factions") != null || getServer().getPluginManager().getPlugin("Factions") != null ) {
             System.out.println("RaidTimer: Plugin Loading...");
             registerCommands();
