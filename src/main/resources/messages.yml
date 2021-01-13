@@ -1,0 +1,11 @@
+messages:
+  CANNOT-MINE-SPAWNER: "&8(&cRaid Block&8) &fYou cannot mine spawners whilst in raid block.\n &fYou have &c{timeleft}&f."
+  CANNOT-BREAK-BLOCK: "&8(&cRaid Block&8) &fYou cannot break blocks whilst in raid block.\n &fYou have &c{timeleft}&f."
+  CANNOT-PLACE-BLOCK: "&8(&cRaid Block&8) &fYou cannot place blocks whilst in raid block.\n &fYou have &c{timeleft}&f."
+  CANNOT-USE-BUCKET: "&8(&cRaid Block&8) &fYou cannot use buckets whilst in raid block.\n &fYou have &c{timeleft}&f."
+  CANNOT-CHEST-SPAWNER: "&8(&cRaid Block&8) &fYou cannot hide spawners whilst in raid block.\n &fYou have &c{timeleft}&f."
+  COMMAND-BLOCKED: "&8(&cRaid Block&8) &fYou cannot use this command whilst in raid block.\n &fYou have &c{timeleft}&f."
+  RAID-BLOCK-STARTED: "&8(&cRaid Block&8) &fYour faction has been raid blocked.\n &fYou have &c{timeleft}&f."
+  ERROR-NO-FACTION: "&8(&cRaid Block&8) &cYou are not in a faction."
+  COMMAND-RAID-BLOCK: "&8(&cRaid Block&8) &fYour faction has &c{timeleft}&f under raid block."
+  RAID-BLOCK-OVER: "&8(&cRaid Block&8) &fYour faction is no longer raid blocked."

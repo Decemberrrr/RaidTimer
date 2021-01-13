@@ -1,0 +1,15 @@
+name: RaidTimer
+authors: [ AnotherDeveloper ]
+main: com.anotherdeveloper.raidtimer.RaidTimer
+description: RaidTimer plugin created by AnotherDeveloper :)
+version: 1.0.0
+api-version: 1.16
+softdepend:
+  - SaberFactions
+  - SavageFactions
+  - Factions
+  - FactionsUUID
+commands:
+  raidblock:
+    aliases: [rb, raidb, rblock]
+    description: Check how long your faction has left in Raid Block

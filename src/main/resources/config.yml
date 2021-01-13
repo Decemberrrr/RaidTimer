@@ -1,0 +1,11 @@
+settings:
+  raid-block-time: 15 # Time in seconds
+  allow-block-placement: false # Can you build whilst Raid Blocked (True/False)
+  allow-block-break: false # Allow Block Break *In claimed land (True/False)
+  allow-spawners-mined: false # Are players allowed to mine spawners whilst Raid Blocked (True/False)
+  allow-chest-spawners: false # Are players allowed to pv, chest or enderchest spawners whilst Raid Blocked (True/False)
+  use-buckets: false # Are players allowed to use buckets whilst Raid Blocked (True/False) *Temporarly use to stop genbuckets
+  blocked-commands: # Commands players cannot use whilst raid blocked (Leave blank for no blocked commands)
+    - '/help'
+    - '/teleport'
+    - '/spawn'
