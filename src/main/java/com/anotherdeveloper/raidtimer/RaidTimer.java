@@ -29,7 +29,7 @@ public class RaidTimer extends JavaPlugin {
         this.configFile = new DataFile(this, "config", true);
         this.messageFile = new DataFile(this, "messages", true);
 
-        if(getServer().getPluginManager().getPlugin("SaberFactions") != null || getServer().getPluginManager().getPlugin("SavageFactions") != null || getServer().getPluginManager().getPlugin("factions") != null || getServer().getPluginManager().getPlugin("FactionsX") != null ) {
+        if(getServer().getPluginManager().getPlugin("SaberFactions") != null || getServer().getPluginManager().getPlugin("SavageFactions") != null || getServer().getPluginManager().getPlugin("factions") != null || getServer().getPluginManager().getPlugin("Factions") != null ) {
             System.out.println("RaidTimer: Plugin Loading...");
             registerCommands();
             registerListeners();

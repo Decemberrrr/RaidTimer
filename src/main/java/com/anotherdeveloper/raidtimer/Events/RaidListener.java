@@ -4,6 +4,7 @@ import com.anotherdeveloper.raidtimer.RaidBlock;
 import com.anotherdeveloper.raidtimer.RaidTimer;
 import com.anotherdeveloper.raidtimer.Utils.ObjectSet;
 import com.anotherdeveloper.raidtimer.Utils.TimeUtil;
+import com.anotherdeveloper.raidtimer.Utils.XMaterial;
 import com.massivecraft.factions.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -118,7 +119,7 @@ public class RaidListener implements Listener {
     @EventHandler
     private void onSpawnerChest(InventoryClickEvent event) {
         if (event.getView().getTopInventory() != null) {
-            if (Objects.requireNonNull(event.getCurrentItem()).getType() == Material.SPAWNER) {
+            if (XMaterial.matchXMaterial(event.getCurrentItem().getType()) == XMaterial.matchXMaterial(Material.SPAWNER)) {
                 Player player = (Player) event.getWhoClicked();
                 FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
                 Faction faction = fPlayer.getFaction();
