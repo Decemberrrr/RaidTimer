@@ -17,7 +17,7 @@
   <h3 align="center">Raid Timer</h3>
 
   <p align="center">
-    A raid timer plugin made for minecraft, simular too rust raid block.
+    A raid timer plugin made for minecraft, similar too rust raid block.
     <br />
     We currently only support FactionUUID forks (we do not support FactionsX currently)
 </p>
