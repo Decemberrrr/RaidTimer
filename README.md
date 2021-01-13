@@ -33,5 +33,4 @@
 [stars-url]: https://github.com/Decemberrrr/RaidTimer/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Decemberrrr/RaidTimer?style=for-the-badge&logo=appveyor
 [issues-url]: https://github.com/Decemberrrr/RaidTimer/issues
-[license-shield]: https://img.shields.io/github/license/Decemberrrr/RaidTimer?style=for-the-badge&logo=appveyor
-[license-url]: https://github.com/Decemberrrr/RaidTimer/blob/main/LICENSE
+
