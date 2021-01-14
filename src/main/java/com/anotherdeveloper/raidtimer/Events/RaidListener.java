@@ -6,22 +6,27 @@ import com.anotherdeveloper.raidtimer.Utils.ObjectSet;
 import com.anotherdeveloper.raidtimer.Utils.TimeUtil;
 import com.anotherdeveloper.raidtimer.Utils.XMaterial;
 import com.massivecraft.factions.*;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -50,9 +55,14 @@ public class RaidListener implements Listener {
                 plugin.getRaidBlocked().get(faction).setTimeRemainingInSeconds(plugin.getConfigFile().getInteger("settings.raid-block-time"));
                 return;
             }
+
+            Entity entity = event.getEntity();
+            entity.getSour  
+
             new RaidBlock(plugin, faction, plugin.getConfigFile().getInteger("settings.raid-block-time"));
         }
     }
+
 
     @EventHandler
     private void onMine(BlockBreakEvent event) {
@@ -68,7 +78,7 @@ public class RaidListener implements Listener {
                     event.setCancelled(true);
                     return;
                 }
-                if (event.getBlock().getType() == Material.SPAWNER) {
+                if (XMaterial.matchXMaterial(event.getBlock().getType()) == XMaterial.SPAWNER) {
                     if (!plugin.getConfigFile().getConfig().getBoolean("settings.allow-spawners-mined")) {
                         plugin.sendMessage(player, "CANNOT-MINE-SPAWNER", new ObjectSet("{timeleft}", TimeUtil.formatTime(plugin.getRaidBlocked().get(faction).getTimeRemainingInSeconds())));
                         event.setCancelled(true);
@@ -170,5 +180,20 @@ public class RaidListener implements Listener {
             }
         }
     }
+
+    /**
+    @EventHandler
+    private void onTntInsert(InventoryClickEvent event) {
+        if (event.getView().getTopInventory() != null && event.getView().getTopInventory().getType() == InventoryType.DISPENSER) {
+            if (XMaterial.matchXMaterial(Objects.requireNonNull(event.getCurrentItem()).getType()) == XMaterial.TNT) {
+                Player player = (Player) event.getWhoClicked();
+                NBTItem nbtTNT = new NBTItem(event.getCurrentItem());
+                nbtTNT.clearCustomNBT();
+                nbtTNT.setString("firedby", player.getName());
+                nbtTNT.applyNBT(event.getCurrentItem());
+                player.sendMessage("nbt set to: " + nbtTNT.getString("firedby"));
+            }
+        }
+    }**/
 
 }
