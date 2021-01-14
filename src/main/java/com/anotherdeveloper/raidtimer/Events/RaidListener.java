@@ -56,9 +56,6 @@ public class RaidListener implements Listener {
                 return;
             }
 
-            Entity entity = event.getEntity();
-            entity.getSour  
-
             new RaidBlock(plugin, faction, plugin.getConfigFile().getInteger("settings.raid-block-time"));
         }
     }
