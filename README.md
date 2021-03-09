@@ -34,6 +34,8 @@ I made this plugin in around 4ish hours so please do not judge the code too hars
 (I currently only added support for massivecraft factions, so factions plugins such as FactionsX will not work yet.)
 </p>
 
+This plugin is no longer being updated due to there not currently being a way that I know of to track tnt.
+
 
 [contributors-shield]: https://img.shields.io/github/contributors/Decemberrrr/RaidTimer?style=for-the-badge&logo=appveyor
 [contributors-url]: https://github.com/Decemberrrr/RaidTimer/graphs/contributors
